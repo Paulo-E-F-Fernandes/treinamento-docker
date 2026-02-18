@@ -5,6 +5,10 @@ Projeto criado para centralizar as informações do treinamendo em Docker.
 Foi utilizado como base de conhecimento para esse projeto de treinamento, o curso `Aprenda DOCKER e contêineres de 
 maneira simples e rápida` da [Udemy](https://www.udemy.com/). 
 
+## Treinamento
+
+> [O que é o DOCKER?](docs/training/01-what-is-docker.md)
+
 ## Estrutura de Diretórios e Arquivos
 
 ### Nomenclatura de Arquivos
@@ -37,7 +41,7 @@ Para projetos maiores, como documentação de software, a organização lógica 
 meu-projeto/
 ├── .github/                # Configurações de automação
 ├── assets/                 # Arquivos de mídia (não-texto)
-│   ├── imagens/            # Prints de tela e diagramas
+│   ├── images/            # Prints de tela e diagramas
 │   └── logos/              # Logotipos do projeto
 ├── docs/                   # Documentação detalhada do projeto
 │   ├── 01-guia-usuario/    # Subpasta temática numerada
