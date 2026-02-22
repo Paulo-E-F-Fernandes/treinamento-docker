@@ -8,7 +8,10 @@ maneira simples e rápida` da [Udemy](https://www.udemy.com/).
 ## Treinamento
 
 > [O que é o DOCKER?](docs/training/01-what-is-docker.md)
+
 > [Instalando o DOCKER](docs/training/02-installing-docker.md)
+
+> [Download da primeira imagem](docs/training/03-download-first-image.md)
 
 ## Estrutura de Diretórios e Arquivos
 
