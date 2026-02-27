@@ -89,3 +89,106 @@ selecionada.
 
 No _Docker Desktop_, também possui a sessão _Docker Hub_, a qual podemos procurar pelas imagens e posteriormente 
 realizar o _download_ das mesmas.
+
+## Executando contêineres
+
+Agora vamos baixar uma imagem maior, como a do _Ubuntu_, por exemplo.
+
+- Para esse teste, vamos baixar a imagem do _Ubuntu_ utilizando o comando abaixo:
+
+  ```shell
+  $ docker pull ubuntu
+  
+  Using default tag: latest
+  latest: Pulling from library/ubuntu
+  01d7766a2e4a: Pull complete
+  fd8cda969ed2: Download complete
+  Digest: sha256:d1e2e92c075e5ca139d51a140fff46f84315c0fdce203eab2807c7e495eff4f9
+  Status: Downloaded newer image for ubuntu:latest
+  docker.io/library/ubuntu:latest
+  ```
+
+- Como não foi informada a versão desejada, a imagem baixada é a da _tag latest_, que é a última imagem disponível 
+  no repositório.
+
+- Para conferir as imagens que estão disponíveis, rodamos o comando `docker images`.
+  ```shell
+  $ docker images
+  
+  IMAGE                ID             DISK USAGE   CONTENT SIZE
+  hello-world:latest   ef54e839ef54       25.9kB         9.52kB
+  ubuntu:latest        d1e2e92c075e        119MB         31.7MB
+  ```
+
+- Comparada com uma _ISO_ de instalação do _Ubuntu_, que pode ter gigas de tamanho, a imagem _docker_ do _Ubuntu_, 
+  possui apenas 119MB.
+
+- Para executar o contêiner do _Ubuntu_, vamos utilizar o comando `docker run ubuntu`
+  - Ao executar esse comando, o contêiner é iniciado, fica algum tempo em execução e é finalizado;
+  - Podemos ver isso com o comando abaixo. Analisando o retorno, vemos que o contêiner do _Ubuntu_ executou com o 
+    _ID_ f4ebeeb278da e foi encerrado:
+    ```shell
+    $ docker ps -a
+
+    CONTAINER ID   IMAGE                COMMAND       CREATED          STATUS                      PORTS     NAMES
+    f4ebeeb278da   ubuntu               "/bin/bash"   4 minutes ago    Exited (0) 4 minutes ago              inspiring_ride
+    a264e701766c   hello-world          "/hello"      21 minutes ago   Exited (0) 21 minutes ago             pedantic_kirch
+    5778be475bb2   hello-world:latest   "/hello"      3 days ago       Exited (0) 3 days ago                 teste-123
+    ae17d2665a55   hello-world:latest   "/hello"      3 days ago       Exited (0) 3 days ago                 unruffled_bose
+    ``` 
+  - Vamos executar a imagem novamente, mas fazer com que o contêiner execute por 10 segundos antes de sair:
+    ```shell
+    docker run ubuntu sleep 10
+    ```
+    - Rodando com o _sleep_, o contêiner será executado e somente após passado o tempo informado que o mesmo será 
+      encerrado. Durante o tempo de execução, o cursor do terminal fica preso, sem podermos executar nenhum outro 
+      comando.
+    ```shell
+    $ docker ps -a
+    CONTAINER ID   IMAGE                COMMAND       CREATED          STATUS                      PORTS     NAMES
+    55c0f484ce0e   ubuntu               "sleep 10"    7 minutes ago    Exited (0) 7 minutes ago              frosty_gauss
+    ...
+    ```
+- Agora vamos executar a imagem do _Ubuntu_ em um terminal com um tempo, maior, de 1500 segundos, por exemplo, e 
+  abrir outro terminal para ver o contêiner em execução e também finalizar o mesmo:
+  - No primeiro terminal:
+    ```shell
+    $ docker run ubuntu sleep 1500
+  
+    ```
+  - No segundo terminal:
+    - Executamos o comando `docker ps` e identificamos que o contêiner continua em execução
+      ```shell
+      $ docker ps
+      CONTAINER ID   IMAGE     COMMAND        CREATED          STATUS          PORTS     NAMES
+      d878871e3cb8   ubuntu    "sleep 1500"   12 seconds ago   Up 12 seconds             relaxed_moore
+      ```
+    - Para encerrar o contêiner em execução, podemos rodar o comando `docker stop` seguido do valor do _CONTAINER 
+      ID_ ou do _NAMES_:
+      ```shell
+      $ docker stop d878871e3cb8
+      d878871e3cb8
+      ```
+      ```shell
+      $ docker ps
+      CONTAINER ID   IMAGE     COMMAND        CREATED         STATUS         PORTS     NAMES
+      e8af02dc386f   ubuntu    "sleep 1500"   4 seconds ago   Up 4 seconds             nostalgic_jones
+      
+      $ docker stop  nostalgic_jones
+      nostalgic_jones
+      ```
+      
+- Vamos iniciar um contêiner _docker_ em modo interativo
+  - Ao iniciar um contêiner _docker_ com a imagem do _Ubuntu_ em modo interativo, podemos digitar comandos dentro do 
+    sistema operacional do _Ubuntu_
+  - Para isso, vamos executar o comando abaixo `docker run -it ubuntu`, onde:
+    - `-i` (--interactive), um modo interativo no contêiner para que possar ser realizada interações
+    - `-t` (--tty), para alocar um pseudo terminal para podermos trabalhar
+  - Ao executar esse comando, conseguimos ver que somos logados no root do contêiner e não mais no terminal do 
+    computador, dessa forma, estamos dentro do contêiner
+  - Se utilizarmos os comandos do _Linux_, como o `ls -l`, vemos a listagem de diretórios e arquivos do contêiner 
+    _Ubuntu_
+  - Se utilizarmos o comando `cat /etc/*release*`, conseguimos visualizar a versão do `Ubuntu` que está em execução
+  - Ao executar o comando `exit`, saimos do sistema operacional, terminando o contêiner
+  - Ao executar o comando `docker ps` não aparece mais a execução do contêiner, pois o mesmo foi finalizado com o comando `exit`
+  - Ao executar o comando `docker ps -a`, conseguimos confirmar que o contêiner foi encerrado

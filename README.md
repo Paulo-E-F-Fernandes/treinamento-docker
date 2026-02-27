@@ -11,7 +11,7 @@ maneira simples e rápida` da [Udemy](https://www.udemy.com/).
 
 > [Instalando o DOCKER](docs/training/02-installing-docker.md)
 
-> [Download da primeira imagem](docs/training/03-download-first-image.md)
+> [Download das primeiras imagens](docs/training/03-download-first-image.md)
 
 ## Estrutura de Diretórios e Arquivos
 
