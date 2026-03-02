@@ -13,6 +13,8 @@ maneira simples e rápida` da [Udemy](https://www.udemy.com/).
 
 > [Download das primeiras imagens](docs/training/03-download-first-image.md)
 
+> [VELHA sintaxe e a NOVA sintaxe](docs/training/04-old-and-new-syntax.md)
+
 ## Estrutura de Diretórios e Arquivos
 
 ### Nomenclatura de Arquivos
