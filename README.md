@@ -15,6 +15,8 @@ maneira simples e rápida` da [Udemy](https://www.udemy.com/).
 
 > [VELHA sintaxe e a NOVA sintaxe](docs/training/04-old-and-new-syntax.md)
 
+> [Executando contêineres](docs/training/05-running-containers.md) 
+
 ## Estrutura de Diretórios e Arquivos
 
 ### Nomenclatura de Arquivos
